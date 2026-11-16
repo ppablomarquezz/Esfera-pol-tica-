@@ -148,6 +148,13 @@ a{color:var(--ac)}
 #vp .fourthDetail .lnk{display:inline;font-size:11px}
 @media (max-width:540px){#vp .fourthAxis{right:8px;top:8px}#vp .fourthWord{display:none}}
 @media (max-width:950px) and (max-height:500px) and (orientation:landscape){#vp .fourthAxis{right:8px;top:8px}#vp .fourthWord{display:none}}
+/* ===== v0.14: comentario del autor (desplegable, plegado por defecto: una sola línea) ===== */
+#side .authorNote{border:1px solid var(--bd);border-radius:10px;padding:7px 11px;margin:10px 0 2px;background:var(--pn)}
+#side .authorNote>summary{cursor:pointer;font-size:12.5px;font-weight:600}
+#side .authorNote>summary:hover{text-decoration:underline}
+#side .authorBody{margin-top:7px;padding-top:8px;border-top:1px solid var(--bd);font-size:12.5px;line-height:1.5;color:var(--mut)}
+#side .authorBody p{margin:0 0 8px}
+#side .authorBody p:last-child{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -418,6 +425,7 @@ try{
       <h1 style="font-size:20px">Esfera política de Márquez - Inspirado en el gráfico de Nolan</h1>
       <div class="mut">Mapa experimental en 4 dimensiones: orientación económica, libertad personal, intensidad ideológica y eje apolítico ↔ ideologizado.</div>
     </header>
+    <details id="authorNote" class="authorNote"><summary>✍️ Comentario del autor de la página</summary><div class="authorBody"><p>He creado esta página para que cada uno sea libre de usarla sin anuncio, sin costes y sin derechos de autor. El motivo principal de esta página es deshacerse del uso de los típicos test de ideología de preguntas definidas y sesgadas las cuales pueden tener más de un sentido político y que al final del test te posicionan de forma errónea en un gráfico de David Nolan.</p><p>El motivo de generar un gráfico de tres dimensiones es una conclusión que ya muchos pueden ver en la política viendo que, en muchos casos, los extremos opuestos llegan a decisiones similares a lo largo de la historia (no solo de nuestro país). Más tarde me encontré con Jean-Pierre Faye y me di cuenta de que no tengo originalidad.</p><p>El cómo la esfera mide tu ideología se basa en el prompt que escribas del cual eres completamente libre y sin sesgo más que el de la IA que escojas para posicionarte. La IA mide la relación entre tu prompt y las definiciones y hechos relacionados con las ideologías existentes para poder posicionarte.</p><p>Ante todo, esto es una página de libre uso y puedo cometer errores en cuanto a contenido, por lo que acepto con mucho gusto comentarios acerca de mejoras sobre la página.</p></div></details>
 
     <div class="toolbar">
       <button id="bpar" aria-pressed="false" title="Mostrar u ocultar la capa de partidos políticos de España (1977-hoy)">Partidos de España</button><button id="bh" title="Cómo mide la esfera la opinión política y la conciencia política">¿Cómo se mide?</button><button id="bn">Polo norte</button><button id="bs">Polo sur</button><button id="bl" class="on">Etiquetas ideologías</button><button id="bx" class="on">Etiquetas ejes</button><button id="bv" class="on">Vectores</button><button id="b4" class="on">Teseracto</button><button id="be" class="on">Ecuador 3D</button><button id="br" class="on">Giro</button><button id="bw" class="on" aria-pressed="true" title="Mostrar u ocultar el indicador de conciencia política (W) sobre la esfera">Indicador W</button><button id="bt">Tema</button><button id="bq" title="Menos detalle para móviles modestos (recarga la página)">Modo ligero</button>
@@ -549,7 +557,7 @@ try{
         <li><b>Hiperesfera</b>: la superficie visible es una proyección 3D de la frontera de un espacio 4D; su retícula procede de un teseracto subdividido y esferizado para que tenga aspecto de esfera, como en el referente visual.</li>
       </ul>
     </details>
-    <div class="tiny" style="margin-top:9px">Versión experimental 0.13.0 · con capa opcional de partidos de España · instalable en Windows, Linux, macOS, Android e iOS. Para la IA, conecta tu propio proveedor (Gemini, ChatGPT o Claude) en «Conectar una IA» o usa «Copiar y pegar».</div>
+    <div class="tiny" style="margin-top:9px">Versión experimental 0.14.0 · con capa opcional de partidos de España · instalable en Windows, Linux, macOS, Android e iOS. Para la IA, conecta tu propio proveedor (Gemini, ChatGPT o Claude) en «Conectar una IA» o usa «Copiar y pegar».</div>
   </aside>
 </div>
 
@@ -1234,7 +1242,7 @@ function finishResult(r){active=false;r={...r,engagement:clamp(r.engagement ?? r
 function syncManual(){const e=Number($('econ').value),p=Number($('pers').value),r=Number($('rad').value),w=Number($('eng').value),c=Number($('conf').value);$('econNeg').textContent=(e>=0?'+':'')+e+'%';$('persVal').textContent=(p>=0?'+':'')+p+'%';$('radVal').textContent=r+'%';$('engVal').textContent=w+'%';$('confVal').textContent=c+'%'}
 ['econ','pers','rad','eng','conf'].forEach(id=>$(id).addEventListener('input',syncManual));syncManual();$('manualStart').onclick=()=>{$('startPanel').classList.add('hidden');$('manualPanel').classList.remove('hidden')};$('closeManual').onclick=()=>{$('manualPanel').classList.add('hidden');$('startPanel').classList.remove('hidden')};$('applyManual').onclick=()=>{const r={economic:Number($('econ').value)/100,personal:Number($('pers').value)/100,radicalization:Number($('rad').value)/100,engagement:Number($('eng').value)/100,confidence:{economic:Number($('conf').value)/100,personal:Number($('conf').value)/100,radicalization:Number($('conf').value)/100},summary:'Ubicación realizada manualmente mediante los tres controles del modelo.',descriptors:[],evidence:[]};$('manualPanel').classList.add('hidden');finishResult(r)};
 
-$('exportBtn').onclick=async()=>{if(!lastResult)return;const payload={app:'Esfera política de Márquez',version:'0.13-esfera-hiperesfera',date:new Date().toISOString(),name:$('personName').value.trim()||null,result:lastResult};const json=JSON.stringify(payload,null,2),fn='hiperesfera-politica-marquez-resultado.json';
+$('exportBtn').onclick=async()=>{if(!lastResult)return;const payload={app:'Esfera política de Márquez',version:'0.14-esfera-hiperesfera',date:new Date().toISOString(),name:$('personName').value.trim()||null,result:lastResult};const json=JSON.stringify(payload,null,2),fn='hiperesfera-politica-marquez-resultado.json';
  try{const dl=(window.claude&&typeof window.claude.use==='function')?await window.claude.use('downloads'):null;
   if(dl){try{await dl.save({filename:fn,data:json});showToast('Resultado exportado.');return}catch(e){if(e&&e.code==='declined')return;if(e&&e.code==='rate_limited'){showToast('Espera un momento y vuelve a pulsar «Exportar JSON».');return}}}}catch(e){}
  const blob=new Blob([json],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
