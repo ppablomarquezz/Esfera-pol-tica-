@@ -1,9 +1,14 @@
-ESFERA POLÍTICA DE MÁRQUEZ - Inspirado en el gráfico de Nolan  (versión 0.14)
+ESFERA POLÍTICA DE MÁRQUEZ - Inspirado en el gráfico de Nolan  (versión 0.15)
 
-NOVEDADES DE LA 0.14
+NOVEDADES DE LA 0.15
+ - Nuevo aviso de privacidad, siempre visible y sin tapar nada: una tarjeta en el panel lateral, justo debajo del «Comentario del autor» (en el móvil, debajo de la esfera), con un «Ver detalles» plegable, y una línea corta en la pantalla de bienvenida («Sin anuncios ni rastreo: tu texto no se guarda»; se oculta en pantallas muy bajas para no encoger la animación). Dice solo lo que es cierto: la página no tiene analíticas, cookies ni anuncios, no tiene servidor propio, no envía tus textos ni datos de uso al autor y no guarda lo que escribes ni tus resultados. Y con su matiz: quien aloja la página (p. ej., GitHub, que según su documentación guarda la dirección IP de los visitantes por motivos de seguridad), Wikipedia/Wikimedia al abrir una ficha, el proveedor de IA que conectes y el navegador desde el que se abra (p. ej., el de Instagram) pueden registrar datos por su cuenta. Por eso el aviso NO dice «nadie puede ver nada». Si algún día añades estadísticas de visitas u otro servicio externo, cambia ese aviso (busca «privacyNote» en index.html).
+ - Se ha quitado de la lista de proveedores de IA la opción interna «Servidor propio (/api/interview)» y su código: no se usaba y contradecía el «sin servidor propio».
+ - Para actualizar la página en GitHub solo hay que subir index.html con el mismo nombre: sw.js, manifest e iconos no cambian.
+
+NOVEDADES DE LA 0.14 (versión anterior)
  - Nuevo desplegable «Comentario del autor de la página», justo debajo del título (en el panel lateral; en el móvil, debajo de la esfera). Empieza plegado, en una sola línea, para no ocupar sitio: púlsalo para leer por qué existe la página y cómo mide la esfera tu ideología, y púlsalo otra vez para guardarlo.
 
-NOVEDADES DE LA 0.13 (versión anterior)
+NOVEDADES DE LA 0.13 (anterior)
  - El cuadro de la 4ª dimensión (conciencia política, W) de la esquina superior derecha tapaba parte de la esfera. Ahora es una pastilla pequeña de una sola línea («W · conciencia», una barra y el porcentaje). Si la tocas se despliega una explicación breve que se cierra al tocar la esfera, con la tecla Esc o sola a los 12 segundos. Con la «×» se oculta del todo y con el botón «Indicador W» de la barra vuelve a aparecer. Al abrir o recargar la página empieza siempre visible y plegada (este ajuste no se recuerda).
 
 NOVEDADES DE LA 0.12 (anterior)
@@ -49,7 +54,7 @@ UN ENLACE https PARA PONER EN TUS REDES (gratis, sin anuncios y sin dominio de p
    h. Espera entre 1 y 10 minutos y recarga esa misma página: arriba aparecerá «Your site is live at https://TU-USUARIO.github.io/esfera-politica/» (o «published at»). Pulsa «Visit site». Esa es tu dirección para compartir.
    i. Pruébala en tu ordenador, en tu iPhone y en tu Android antes de compartirla.
    j. Instalarla como app (opcional): iPhone/iPad: Safari > Compartir > «Añadir a pantalla de inicio». Android: Chrome > ⋮ > «Instalar y crear acceso directo» > «Instalar» (en algunas versiones se llama «Instalar aplicación»). Windows/Linux/macOS: icono de instalar en Chrome o Edge.
-   k. Para actualizarla más adelante: en el repositorio, «Add file» > «Upload files», sube los archivos nuevos (sustituyen a los anteriores) y «Commit changes»; recarga la página una o dos veces para que se actualice (la caché es «emp-v6»).
+   k. Para actualizarla más adelante: en el repositorio, «Add file» > «Upload files», sube los archivos nuevos (sustituyen a los anteriores) y «Commit changes»; recarga la página una o dos veces para que se actualice (la caché es «emp-v6»). Si solo cambia index.html (como en la 0.15), basta con subir ese archivo con el mismo nombre.
    Si al abrir el enlace ves un error 404: espera unos minutos y comprueba que index.html está en la raíz del repositorio y que Pages apunta a «main» y «/ (root)».
    Desde un móvil (con el navegador, sin la app de GitHub): descomprime el .zip en la app Archivos (iPhone) o en Archivos de Google (Android) y usa «choose your files» para elegir los archivos; si algún menú no aparece, activa «Sitio de escritorio» en el navegador. Esto último no lo he podido probar.
  2) Cloudflare Pages (gratis; tu dirección será NOMBRE.pages.dev). Según su documentación: crea una cuenta gratuita en cloudflare.com; en el panel entra en «Workers & Pages» > «Create application» > «Get started» > «Drag and drop your files»; escribe un nombre de proyecto; arrastra el .zip de esta app (acepta .zip o carpeta, no hace falta descomprimirlo); pulsa «Deploy site».
@@ -67,7 +72,7 @@ CONECTAR LA IA (cada persona usa su propia cuenta; no hace falta dominio ni serv
  En los planes gratuitos el proveedor puede registrar o usar lo que envíes: no incluyas datos personales. Las opiniones políticas son datos sensibles.
  La petición que se envía a la IA habla solo de ideologías: no menciona partidos.
 
-PRIVACIDAD: no hay anuncios ni rastreadores. La app solo contacta con Wikipedia/Wikimedia (logos) y, si tú lo eliges, con el proveedor de IA que conectes. No hay servidor propio: lo que escribes no se guarda fuera de tu dispositivo, salvo lo que envíes a la IA que elijas.
+PRIVACIDAD: la página no tiene anuncios, analíticas, cookies ni servidor propio, y no guarda lo que escribes ni tus resultados (lo único que se guarda en tu dispositivo es una copia de la propia página para usarla sin conexión y, si pulsas «Modo ligero», esa preferencia). Fuera de tu dispositivo solo salen las peticiones a Wikipedia/Wikimedia al abrir una ficha y el texto que tú envíes al proveedor de IA que conectes o pegues en «Copiar y pegar». Quien aloja la página (GitHub u otro) puede registrar datos técnicos de las visitas, como cualquier servidor web, y el navegador desde el que se abra (p. ej., el de Instagram) también. El aviso de la propia página lo explica en «Ver detalles».
 
 LOGOS Y ENLACES: se cargan de Wikipedia/Wikimedia (necesitan internet). Si no hay logo o no hay conexión, se muestran las siglas. Para cambiar candidatos de ideologías edita la lista PT y la tabla LK dentro de index.html; los partidos están en la constante PAR (formato JSON).
 
